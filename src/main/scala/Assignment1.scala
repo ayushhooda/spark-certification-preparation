@@ -22,4 +22,28 @@ object Assignment1 extends App {
   val ans4 = words.filter(word => word.length == 4 || word.length == 5 || word.length == 6)
       .map(word => (word, 1)).reduceByKey(_ + _).collect
 
+
+  def isVowel(char: Char): Boolean = {
+    val ch = char.toUpper
+    if(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+      true
+    else
+      false
+  }
+
+  def ifContainsAtleastThreeVowels(word: String): Boolean = {
+    val listOfChar = word.toList
+    def innerFunc(listOfChar: List[Char], vowelsCount: Int): Boolean = {
+      listOfChar match {
+        case Nil if vowelsCount >= 3 => true
+        case Nil => false
+        case head :: tail if isVowel(head) => innerFunc(tail, vowelsCount + 1)
+        case _ :: tail => innerFunc(tail, vowelsCount)
+      }
+    }
+    innerFunc(listOfChar, 0)
+  }
+
+  val ans5 = words.filter(word => ifContainsAtleastThreeVowels(word)).collect
+
 }
