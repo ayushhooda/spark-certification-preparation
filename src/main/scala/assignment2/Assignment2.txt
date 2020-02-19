@@ -1,0 +1,28 @@
+Bike and Stations
+
+We have two Datasets Bike Data and Station Data, Bike operates between two stations
+The objective of this exercise is to do the following
+
+Note: Use RDDs First and Then DataFrames to solve this problem
+
+1. Read All the Data from files and Preserve the Headers
+
+2. Change the Column Name of Start Station and End Station to Source and Destination
+
+3. Find out the Maximum Trips by a Bike
+
+4. Find out the Maximum Trips between Same Stations by a Bike
+
+5. Correct the Zip Codes Format, The US Zipcode is 5 digits long some of them are missing leading Zeroes.
+
+6. Identify the People Who have traveled together for the trips
+
+7. Identify the Least Used Bike from the Data
+
+8. Find out the Mean, Max, Min, Median   Durations of trips from the above data
+
+9. For every Station give the count of trips In and Out of that station.
+
+10. Find the shortest and longest Trip for every Bike.
+
+11. For every Bike give us the number of unique People that have handled it .
