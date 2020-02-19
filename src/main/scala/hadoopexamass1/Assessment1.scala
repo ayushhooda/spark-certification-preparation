@@ -1,7 +1,9 @@
 package hadoopexamass1
 
-import org.apache.spark.sql.functions.{ expr, sum, col, sumDistinct}
-import org.apache.spark.sql.{Encoders, SparkSession}
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.{Encoders, Row, SparkSession}
+
 
 object Assessment1 extends App {
 
@@ -99,6 +101,118 @@ object Assessment1 extends App {
 
   // get the total of all distinct fees
   df3.select(sumDistinct("fee")).show
+
+  val df4 = spark.read.format("csv").option("header", "true")
+    .option("sep", "|").option("inferSchema", "true").load("/home/ayush/Desktop/extra/Databricks-Spark/file.csv")
+  df4.show()
+
+  // change the type for columns sub_start_date, sub_end_date to date instead of string where
+  // new column name should be StartDate, EndDate. Existing columns should be dropped.
+  df4.withColumn("StartDate", to_date(col("sub_start_date")))
+    .withColumn("EndDate", col("sub_end_date").cast(DateType))
+    .drop("sub_start_date", "sub_end_date").show
+
+  // using the regex, extract only the date and ignore the time part, in string type
+  val regExp = " - - "
+//  df4.withColumn(col("sub_start_date").)
+
+  // split the location column in two separate columns City and State and drop existing location column
+  df4.withColumn("City", split(col("location"), "-")(0))
+    .withColumn("State", split(col("location"), "-")(1))
+    .drop("location").show()
+
+  // subscription length in number of days, month, month with upto one decimal place, absolute month
+  df4.withColumn("SubscriptionLengthInDays", datediff(col("sub_end_date"), col("sub_start_date")))
+  .withColumn("SubscriptionLengthInMonths", datediff(col("sub_end_date"), col("sub_start_date")) / 30)
+  .withColumn("SubscriptionLengthInMonthsD", round(datediff(col("sub_end_date"), col("sub_start_date")) / 30, 1))
+  .withColumn("SubscriptionLengthInAbsMonth", round(datediff(col("sub_end_date"), col("sub_start_date")) / 30).cast("integer"))
+  .withColumn("SubscriptionLengthInCeil", ceil(datediff(col("sub_end_date"), col("sub_start_date")) / 30).cast("integer"))
+    .show()
+
+  // extended subscription date by 90 days with date format dd-mm-yyyy
+
+  df4.withColumn("ExtendedDate", date_format(date_add(col("sub_end_date"), 90), "dd-MM-yyyy")).show
+
+  // read json file
+  val df5 = spark.read.format("json").load("/home/ayush/Desktop/extra/Databricks-Spark/jsonFile.json")
+
+  // define custom schema
+  val schema = StructType(
+    Array(
+      StructField("id", LongType),
+      StructField("fee", LongType),
+      StructField("duration", LongType),
+      StructField("name", StringType),
+      StructField("venue", StringType)
+    )
+  )
+
+  val df6 = spark.read.format("json").schema(schema).load("/home/ayush/Desktop/extra/Databricks-Spark/jsonFile.json")
+
+  val rowData = spark.sparkContext.parallelize(Seq(
+    Row(1001, "Amit Kumar", 10000.0, "Mumbai", 5),
+    Row(1002, "John", 10000.0, "Mumbai", 5),
+    Row(1003, "Venkat", 10000.0, "Delhi", 5),
+    Row(1004, "Sarfraj", 10000.0, "Kolkata", 5)
+  ))
+
+  val rowSchema = StructType(
+    Array(
+      StructField("id", IntegerType),
+      StructField("name", StringType),
+      StructField("fee", DoubleType),
+      StructField("venue", StringType),
+      StructField("duration", IntegerType)
+    )
+  )
+
+  val df7 = spark.createDataFrame(rowData, rowSchema)
+
+  df7.select(col("id"), col("name")).show()
+  df7.selectExpr("*", "id As COURSE_ID").show()
+
+  val schema8 = StructType(
+    Array(
+      StructField("id", IntegerType, nullable = false),
+      StructField("name", StringType, nullable = false),
+      StructField("fee", DoubleType, nullable = false),
+      StructField("venue", StringType, nullable = false),
+      StructField("duration", IntegerType, nullable = false)
+    )
+  )
+
+  val df8_1 = spark.createDataFrame(spark.sparkContext.parallelize(Seq(
+    Row(1001, "Amit Kumar", 10000.0, "Mumbai", 5),
+    Row(1002, "John", 9000.0, "Mumbai", 5),
+    Row(1003, "Venkat", 6000.0, "Delhi", 5),
+    Row(1004, "Sarfraj", 12000.0, "Kolkata", 5)
+  )), schema8)
+
+  val df8_2 = spark.createDataFrame(spark.sparkContext.parallelize(Seq(
+    Row(1005, "Manoj" , 15000.0 , "Banglore" , 5),
+    Row(1006, "Jasmin" , 16000.0 , "Mumbai" , 5),
+    Row(1007, "Reegal" , 8000.0 , "Banglore" , 5),
+    Row(1008, "Sayed" , 7000.0 , "Banglore" , 5)
+  )), schema8)
+
+  val unionDF = df8_1.union(df8_2)
+  unionDF.show
+  df8_1.filter("venue = 'Mumbai'").union(df8_2.filter("venue = 'Mumbai'")).show
+
+  unionDF.withColumn("Website", lit("HadoopExam.com")).show
+
+  unionDF.withColumn("FeeGreater", expr("fee > 10000")).show
+
+  unionDF.withColumn("Website",
+    when(expr("fee > 10000"), lit("Hadoop")).otherwise("Quick")).show
+
+  unionDF.rdd.getNumPartitions
+  unionDF.repartition(5, expr("venue")).coalesce(2)
+  unionDF.withColumn("TotalFee", round(expr("1.18367 * fee"), 2)).show
+
+  unionDF.selectExpr("monotonically_increasing_id() as UniqueId", "*").show
+
+  unionDF.withColumn("City", lpad(upper(col("venue")), 3, "").as("City")).show
 
 
 }

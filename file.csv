@@ -1,0 +1,6 @@
+user_id|course_id|name|email|sub_start_date|sub_end_date|location
+1|1001|Amit|amit@hadoopexam.com|2019-06-27 00:00:00|2019-12-27 00:00:00|Mumbai-MH
+2|1003|Rakesh|rakesh2hadoopexam.com|2019-08-11 01:00:00|2020-08-11 00:00:00|Jaipur-RAJ
+3|1001|Neeta|neeta@hadoopexam.com|2019-08-19 02:30:15|2020-02-19 00:00:00|Banglore-KA
+4|1003|Venkat|venkat@hadoopexam.com|2019-08-21 04:00:00|2020-08-21 00:00:00|Noida-UP
+5|1002|Raja|raja@hadoopexam.com|2019-08-27 06:30:30|2019-11-27 00:00:00|Chennai-TN
