@@ -1,8 +1,7 @@
 package chapter7
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.{count, countDistinct, approx_count_distinct, first, last,
-  min, max, sum, sumDistinct, avg, mean, var_pop, var_samp, stddev_pop, stddev_samp, collect_list, collect_set}
+import org.apache.spark.sql.functions._
 
 object Chapter7 extends App {
 

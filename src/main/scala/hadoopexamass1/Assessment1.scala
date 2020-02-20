@@ -214,5 +214,142 @@ object Assessment1 extends App {
 
   unionDF.withColumn("City", lpad(upper(col("venue")), 3, "").as("City")).show
 
+  val data13 = Seq(
+    Row(1001, "Amit Kumar", 10000.0, "Mumbai", 5, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1002, "John", 10000.0, "Mumbai", 5, "AWS Training by HadoopExam.com"),
+    Row(1003, "Venkat", 10000.0, "Delhi", 5, "Cassandra Training by HadoopExam.com"),
+    Row(1004, "Sarfraj", 10000.0, "Kolkata", 5, "Java and Python Training by HadoopExam.com"),
+    Row(1005, "Manoj", 11000.0, "Banglore", 5, "FinTech Training by HadoopExam.com"),
+    Row(1006, "Jasmin", 11000.0, "Mumbai", 5, "IOT Training by HadoopExam.com"),
+    Row(1007, "Reegal", 11000.0, "Banglore", 5, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1008, "Sayed", 11000.0, "Banglore", 5, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1009, "Mike", 15000.0, "Newyork", 7, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1010, "Javier", 14000.0, "Washington", 3, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1011, "Ronak", 16000.0, "London", 4, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1012, "Fiaz", 19000.0, "Baltimor", 7, "AWS Training by QuickTechie.com"),
+    Row(1013, "Vikram", 19000.0, "Baltimor", 7, "Cassandra Training by QuickTechie.com"),
+    Row(1014, "Deepak", 19000.0, "Baltimor", 7, "Java Training by QuickTechie.com"),
+    Row(1015, "Venugopal", 19000.0, "Baltimor", 7, "Oracle DBA Training by QuickTechie.com"),
+    Row(1016, "Shankar", 19000.0, "Baltimor", 7, "Oracle DBA Training by QuickTechie.com"),
+  )
+
+  val schema13 = StructType(
+    Array(
+      StructField("id", IntegerType),
+      StructField("name", StringType),
+      StructField("fee", DoubleType),
+      StructField("venue", StringType),
+      StructField("duration", IntegerType),
+      StructField("detail", StringType)
+    )
+  )
+
+  val df13 = spark.createDataFrame(spark.sparkContext.parallelize(data13), schema13)
+
+  // if detail column contain any of these words Hadoop, Spark, AWS, Java, Python and IOT, then replace
+  // it with word Common
+  val regexString = "Hadoop|Spark|AWS|Java|Python|IOT"
+  df13.withColumn("COMMON_DETAIL", regexp_replace(expr("detail"), regexString, "Common"))
+    .show(false)
+
+  // if detail column contain any of these words Hadoop, Spark, AWS, Java, Python and IOT, then
+  // extract their first occurance and add into separate column
+  val regexString2 = "(Hadoop|Spark|AWS|Java|Python|IOT)"
+  df13.withColumn("Extracted", regexp_extract(expr("detail"), regexString2, 1))
+    .withColumn("NewExtracted", when(expr("Extracted <> ''"), expr("Extracted"))
+    .otherwise("Spark"))
+    .show(false)
+
+  val schema14 = StructType(
+    Array(
+      StructField("id", IntegerType),
+      StructField("name", StringType),
+      StructField("fee", DoubleType),
+      StructField("venue", StringType),
+//      StructField("duration", IntegerType),
+      StructField("subStartDate", StringType),
+      StructField("subEndDate", StringType)
+    )
+  )
+
+  val data14 = spark.sparkContext.parallelize(Seq(
+    Row(1001, "Amit Kumar" , 10000.0 , "Mumbai" , "28-Jan-2018", "28-Jan-2019"),
+    Row(1002, "John" , 10000.0 , "Mumbai" ,  "21-Feb-2018", "21-Feb-2019"),
+    Row(1003, "Venkat" , 10000.0 , "Delhi" ,  "11-Mar-2018", "11-Jun-2019"),
+    Row(1004, "Sarfraj" , 10000.0 , "Kolkata" , "28-Apr-2018", "28-Aug-2019"),
+    Row(1005, "Manoj" , 11000.0 , "Banglore" , "28-Jan-2019", "28-Jan-2020"),
+    Row(1006, "Jasmin" , 11000.0 , "Mumbai" ,  "28-Jan-2018", "28-Jan-2021"),
+    Row(1007, "Reegal" , 11000.0 , "Banglore" ,  "28-Jan-2018", "28-Jan-2020"),
+    Row(1008, "Sayed" , 11000.0 , "Banglore" ,  "28-Jan-2018", "28-Jan-2021"),
+    Row(1009, "Mike" , 15000.0 , "Newyork" ,  "28-Jan-2018", "28-Jan-2020"),
+    Row(1010, "Javier" , 14000.0 , "Washington" , "28-Jan-2018", "28-Jan-2022"),
+    Row(1011, "Ronak" , 16000.0 , "London" ,  "28-Jan-2018", "28-Jan-2024"),
+    Row(1012, "Fiaz" , 19000.0 , "Baltimor" ,  "28-Jan-2018", "28-Jan-2023"),
+    Row(1013, "Vikram" , 19000.0 , "Baltimor" ,  "28-Jan-2018", "28-Jan-2021"),
+    Row(1014, "Deepak" , 19000.0 , "Baltimor" ,  "28-Jan-2018", "28-Jan-2020"),
+    Row(1015, "Venugopal" , 19000.0 , "Baltimor" ,  "28-Jan-2018", "28-May-2019")
+  ))
+
+  val df14 = spark.createDataFrame(data14, schema14)
+
+  df14.withColumn("NoOfDays", datediff(to_date(col("subEndDate"), "dd-MMM-yyyy"), to_date(col("subStartDate"), "dd-MMM-yyyy")))
+    .show()
+
+  val data15 = spark.sparkContext.parallelize(Seq(
+    Row(1001, "Amit Kumar" , 10000.0 , "Mumbai" , 5 , "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1002, "John" , 10000.0 , "Mumbai" , 5, "AWS Training by HadoopExam.com"),
+    Row(1003, "Venkat" , 10000.0 , "Delhi" , 5, "Cassandra Training by HadoopExam.com"),
+    Row(1004, "Sarfraj" , 10000.0 , "Kolkata" , 5, "Java and Python Training by HadoopExam.com"),
+    Row(1005, "Manoj" , 11000.0 , "Banglore" , 5, "FinTech Training by HadoopExam.com"),
+    Row(1006, "Jasmin" , 11000.0 , "Mumbai" , 5, "IOT Training by HadoopExam.com"),
+    Row(1007, "Reegal" , 11000.0 , "Banglore" , 5, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1008, "Sayed" , 11000.0 , "Banglore" , 5, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1009, "Mike" , 15000.0 , "Newyork" , 7, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1010, "Javier" , 14000.0 , "Washington" , 3, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1011, "Ronak" , 16000.0 , "London" , 4, "Hadoop and Spark Training by HadoopExam.com"),
+    Row(1012, "Fiaz" , 19000.0 , "Baltimor" , 7, "AWS Training by QuickTechie.com"),
+    Row(1013, "Vikram" , 19000.0 , "Baltimor" , 7, "Cassandra Training by QuickTechie.com"),
+    Row(1014, "Deepak" , 19000.0 , "Baltimor" , 7, "Java Training by QuickTechie.com"),
+    Row(1015, "Venugopal" , 19000.0 , "Baltimor" , 7, "Oracle DBA Training by QuickTechie.com"),
+    Row(1016, "Shankar" , 19000.0 , "Baltimor" , 7, "Oracle DBA Training by QuickTechie.com"),
+    Row(1017, "Rohit" , null , "Baltimor" , 7, "Oracle DBA Training by QuickTechie.com"),
+    Row(1018, "Ranu" , 19000.0 , null , 7, null),
+    Row(1019, "Diksha" , 19000.0 , "Baltimor" , 7, null),
+    Row(null, null, null, null,null,null)
+  ))
+
+  val schema15 = StructType(
+    Array(
+      StructField("id", IntegerType),
+      StructField("name", StringType),
+      StructField("fee", DoubleType),
+      StructField("venue", StringType),
+      StructField("duration", IntegerType),
+      StructField("detail", StringType)
+    )
+  )
+
+  val df15 = spark.createDataFrame(data15, schema15)
+
+  // replace all the missing venue columns in the DataFrame with Mumbai
+  df15.withColumn("Venue", coalesce(col("venue"), lit("Mumbai")))
+
+  // remove entire row if all the columns are null
+  df15.na.drop("all")
+
+  // remove entire row if venue and detail are null
+  df15.na.drop(Seq("venue", "detail")).show
+
+  // remove entire row if any of the columns are null
+  df15.na.drop("any")
+
+  // replace all the missing string values with the "~~~"
+  df15.na.fill("~~~")
+
+  // replace if fee is null then 10000
+  df15.na.fill(Map("fee" -> 10000)).show
+
+
+
 
 }
