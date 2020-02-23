@@ -1,0 +1,101 @@
+ID,Name,Fee,Venue,Date,Duration
+1,HE Hadoop,9000,Mumbai,01-Aug-2018,2
+2,HE Spark,7000,Kolkata,04-Aug-2018,3
+3,HE SparkSQL,6000,Hyderabad,07-Aug-2018,4
+4,HE Spark Graph,6000,Chennai,10-Aug-2018,5
+5,HE Machine Learning,10000,London,13-Aug-2018,2
+6,HE Data Science,12000,Washington,16-Aug-2018,3
+7,HE Java,6000,Navada,19-Aug-2018,4
+8,HE Scala,6000,Newyork,22-Aug-2018,5
+9,HE Python,6000,Sydney,25-Aug-2018,2
+10,HE Unix,7000,Singapore,28-Aug-2018,3
+11,HE C++,5000,Pune,31-Aug-2018,4
+12,HE Data Structure,4000,New Delhi,03-Sep-2018,5
+13,HE Web Service,6000,Yokohama,06-Sep-2018,2
+14,HE Spring Framework,8000,Osaka,09-Sep-2018,3
+15,HE Hybernate,7000,Beijing,12-Sep-2018,4
+16,HE JPA,7000,Hong Kong,15-Sep-2018,5
+17,HE Silverlight,6000,Shenzhen,18-Sep-2018,2
+18,HE Oracle DBA,10000,Berlin,21-Sep-2018,3
+19,HE Oracle PLSQL,6000,Munich,24-Sep-2018,4
+20,HE Cassandra,10000,Frankfurt,27-Sep-2018,5
+21,HE MongoDB,10000,Dubai,01-Aug-2018,2
+22,HE AWS Developer,6000,Mumbai,04-Aug-2018,3
+23,HE AWS Admin,7000,Kolkata,07-Aug-2018,4
+24,HE AWS Security,10000,Hyderabad,10-Aug-2018,5
+25,HE AWS Networking,10000,Chennai,13-Aug-2018,2
+26,HE Azure Developer,8000,London,16-Aug-2018,3
+27,HE Azure Admin,8000,Washington,19-Aug-2018,4
+28,HE Kalli Linux,7000,Navada,22-Aug-2018,5
+29,HE Ubuntu Linux,6000,Newyork,25-Aug-2018,2
+30,HE Kerberos,8000,Sydney,28-Aug-2018,3
+31,HE LDAP,7000,Singapore,31-Aug-2018,4
+32,HE Java Security Framework,8000,Pune,03-Sep-2018,5
+33,HE Java Concurrency,6000,New Delhi,06-Sep-2018,2
+34,HE Android Devloper,10000,Yokohama,09-Sep-2018,3
+35,HE Google Cloud Developer,6000,Osaka,12-Sep-2018,4
+36,HE Google Cloud Admin,7000,Beijing,15-Sep-2018,5
+37,HE Digital Marketing,9000,Hong Kong,18-Sep-2018,2
+38,HE Spark MLib,12000,Shenzhen,21-Sep-2018,3
+39,HE Hadoop Hive,6000,Berlin,24-Sep-2018,4
+40,HE Hadoop Pig,7000,Munich,27-Sep-2018,5
+41,HE Hadoop Security,12000,Frankfurt,01-Aug-2018,2
+42,HE Cloudera Hadoop Developer,10000,Dubai,04-Aug-2018,3
+43,HE CCA175 ,6000,Mumbai,07-Aug-2018,4
+44,HE CCP DE575,8000,Kolkata,10-Aug-2018,5
+45,HE CCA131,10000,Hyderabad,13-Aug-2018,2
+46,HE CCA159,8000,Chennai,16-Aug-2018,3
+47,HE HDPCD Spark,7000,London,19-Aug-2018,4
+48,HE HDPCD NoJava,7000,Washington,22-Aug-2018,5
+49,HE HDPCD JAVA,7000,Navada,25-Aug-2018,2
+50,HE Salesforce Developer,8000,Newyork,28-Aug-2018,3
+51,HE Salesforce Admin,12000,Sydney,31-Aug-2018,4
+52,HE SAS Advanced,8000,Singapore,03-Sep-2018,5
+53,HE SAS Base,7000,Pune,06-Sep-2018,2
+54,HE SAS BigData,12000,New Delhi,09-Sep-2018,3
+55,HE SAS Integration,10000,Yokohama,12-Sep-2018,4
+56,HE SAS Administrator,4000,Osaka,15-Sep-2018,5
+57,HE EMC Datascience,12000,Beijing,18-Sep-2018,2
+58,HE EMC Storage,8000,Hong Kong,21-Sep-2018,3
+59,HE NetAPP,6000,Shenzhen,24-Sep-2018,4
+60,HE VMWare,7000,Berlin,27-Sep-2018,5
+61,HE Gemfire Caching,7000,Munich,01-Aug-2018,2
+62,HE Redis Caching,8000,Frankfurt,04-Aug-2018,3
+63,HE AWS Elasticache,12000,Dubai,07-Aug-2018,4
+64,HE HBase,8000,Mumbai,10-Aug-2018,5
+65,HE Adobe Media,9000,Kolkata,13-Aug-2018,2
+66,HE Iphone App Developer,8000,Hyderabad,16-Aug-2018,3
+67,HE Mac Admin,10000,Chennai,19-Aug-2018,4
+68,HE Dell Admin,12000,London,22-Aug-2018,5
+69,HE CA Admin,12000,Washington,25-Aug-2018,2
+70,HE Storage Architecture,8000,Navada,28-Aug-2018,3
+71,HE Tibco Messaging,12000,Newyork,31-Aug-2018,4
+72,HE Kafka,8000,Sydney,03-Sep-2018,5
+73,HE Datadog,12000,Singapore,06-Sep-2018,2
+74,HE Tablaeu,10000,Pune,09-Sep-2018,3
+75,HE QlikSense,10000,New Delhi,12-Sep-2018,4
+76,HE Qlikview,12000,Yokohama,15-Sep-2018,5
+77,HE Data Science Statistics,15000,Osaka,18-Sep-2018,2
+78,HE Datascience Algorithm,12000,Beijing,21-Sep-2018,3
+79,HE Robotics,12000,Hong Kong,24-Sep-2018,4
+80,HE IOT,12000,Shenzhen,27-Sep-2018,5
+81,HE Hue,6000,Berlin,01-Aug-2018,2
+82,HE Oozie,8000,Munich,04-Aug-2018,3
+83,HE Struts,7000,Frankfurt,07-Aug-2018,4
+84,HE Jquery,9000,Dubai,10-Aug-2018,5
+85,HE DotNet,7000,Mumbai,13-Aug-2018,2
+86,HE Design Pattern,6000,Kolkata,16-Aug-2018,3
+87,HE AWS Lambda,7000,Hyderabad,19-Aug-2018,4
+88,HE Redhat Admin,10000,Chennai,22-Aug-2018,5
+89,HE Network Admin,12000,London,25-Aug-2018,2
+90,HE CPU Deign,7000,Washington,28-Aug-2018,3
+91,HE GPU Design,6000,Navada,31-Aug-2018,4
+92,HE Ethical Hacking,12000,Newyork,03-Sep-2018,5
+93,HE Hacking,8000,Sydney,06-Sep-2018,2
+94,HE Antivirus development,12000,Singapore,09-Sep-2018,3
+95,HE Shell Script,6000,Pune,12-Sep-2018,4
+96,HE Advanced Core Java,7000,New Delhi,15-Sep-2018,5
+97,HE Ibatis,8000,Yokohama,18-Sep-2018,2
+98,HE Scala Akka,10000,Osaka,21-Sep-2018,3
+99,HE GraphDB,12000,Beijing,24-Sep-2018,4
+100,HE Cloudera Datascience Workbench,15000,Hong Kong,27-Sep-2018,5

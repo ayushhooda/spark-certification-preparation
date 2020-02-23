@@ -40,6 +40,7 @@ object Chapter7 extends App {
 
   // window function
   //  Spark supports three kinds of window functions: ranking functions, analytic functions, and aggregate functions.
+  df.withColumn("date", to_date(col("InvoiceDate"), "MM/d/yyyy H:mm")).show
 
 
 }

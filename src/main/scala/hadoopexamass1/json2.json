@@ -1,0 +1,5 @@
+{"id":6,"name":"Java","fee":6000,"venue":"Mumbai","duration":5}
+{"id":7,"name":"C","fee":5000,"venue":"Pune","duration":4}
+{"id":8,"name":"CPP","fee":4000,"venue":"Hyderabad","duration":3}
+{"id":9,"name":"Perl","fee":4000,"venue":"Kolkata","duration":3}
+{"id":10,"name":"JEE","fee":7000,"venue":"Banglore","duration":7}
